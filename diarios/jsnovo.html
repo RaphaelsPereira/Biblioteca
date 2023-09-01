@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <link rel="stylesheet" href="jsnovo.css">
+    
+</head>
+<body>
+    
+    <header class="header">
+        <h1 class="titulo">Cadastro de livros</h1>
+    </header>
+
+        <div class="textolivros">
+            Livros Disponíveis -
+            <br>
+            <br>
+            1. Diário de um Banana 1
+            <br>
+            2. Diário de um Banana 2: Rodrick é o cara
+            <br>
+            3. Diário de um Banana 3: A gota d’água
+            <br>
+            4. Diário de um Banana. Dias de Cão - Volume 4
+            <br>
+            5. Diário de um Banana 5: A verdade nua e crua
+            <br>
+            6. Diário de um Banana 6: Casa dos horrores
+        </div>
+        <div class="tabela">
+            
+            <input id="nomeLivro" placeholder="Nome" type="text">
+            <input id="autorLivro" placeholder="Autor" type="text">
+            <input id="anoLivro" placeholder="Ano" type="text">
+
+        </div>
+
+        <div class="botoes">
+            <button class="addLivro" onclick="adicionar()">Adicionar Livro</button>
+            <button class="mLivro" onclick="mostrarLivros()">Mostrar</button>   
+        </div>
+        
+
+        <div id="livros"></div>
+    
+    
+    <script>
+        let biblioteca = [];
+
+        function cadastro(nome, autor, ano) {
+            var livro = {
+                nome: nome,
+                autor: autor,
+                ano: ano
+            };
+            biblioteca.push(livro);
+        }
+
+        function adicionar() {
+            let nome = document.getElementById('nomeLivro').value;
+            let autor = document.getElementById('autorLivro').value;
+            let ano = document.getElementById('anoLivro').value;
+            cadastro(nome, autor, ano);
+        }
+
+
+
+        const booksAndImages = {
+            "Diário de um Banana 1": "diario1.png",
+            "Diário de um Banana 2": "diario2.png",
+            "Diário de um Banana 3": "diario3.png",
+            "Diário de um Banana 4": "diario4.png",
+            "Diário de um Banana 5": "diario5.png",
+            "Diário de um Banana 6": "diario6,png",
+        };
+
+
+        function mostrarLivros() {
+            let livrosDiv = document.getElementById('livros');
+            livrosDiv.innerHTML = '';
+
+            if (biblioteca.length === 0) {
+                livrosDiv.innerHTML = 'Biblioteca vazia';
+            } else {
+                for (let i = 0; i < biblioteca.length; i++) {
+                    let livroInfo = document.createElement('div');
+                    livroInfo.style.margin='10px';
+                    livroInfo.style.color='white';
+                    livroInfo.innerHTML = `
+                        <p>Livro ${i + 1}:</p>
+                        <p>Nome: ${biblioteca[i].nome}</p>
+                        <p>Autor: SENAI${biblioteca[i].autor}</p>
+                        <p>Ano: 2023${biblioteca[i].ano}</p>
+                        <img src="${booksAndImages[biblioteca[i].nome]}" alt="Capa do Livro" style="max-width: 300px; height:300px">
+                    `;
+                    
+                    livrosDiv.appendChild(livroInfo);
+                }
+            }
+        }
+        
+    </script>
+ 
+</body>
+</html>
